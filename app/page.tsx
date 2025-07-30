@@ -1,9 +1,12 @@
-import Navbar from "@/components/server/Navbar";
+"use client";
 
-const page = async () => {
+import { Button } from "@/components/ui/button";
+import { signInWithGoogle } from "@/lib/auth/auth-client";
+
+const page = () => {
   return (
     <div className="w-full">
-      <Navbar />
+      <Button onClick={signInWithGoogle}>Sign in with google</Button>
     </div>
   );
 };
