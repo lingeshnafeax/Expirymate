@@ -2,6 +2,7 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "../drizzle";
 import * as authSchema from "@/db/index";
+import { Roles } from "@/types/types";
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: "pg",
@@ -15,7 +16,7 @@ export const auth = betterAuth({
       role: {
         type: "string",
         required: false,
-        defaultValue: "user",
+        defaultValue: "user" satisfies Roles,
         description: "The role of the user in the system",
         input: false,
       },

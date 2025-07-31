@@ -1,12 +1,49 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { signInWithGoogle } from "@/lib/auth/auth-client";
 
 const page = () => {
   return (
-    <div className="w-full">
-      <Button onClick={signInWithGoogle}>Sign in with google</Button>
+    <div className="relative min-h-screen w-full bg-white">
+      {/* Warm Orange Glow Top */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          background: "#ffffff",
+          backgroundImage: `
+        radial-gradient(
+          circle at top center,
+          rgba(255, 140, 60, 0.5),
+          transparent 70%
+        )
+      `,
+          filter: "blur(80px)",
+          backgroundRepeat: "no-repeat",
+        }}
+      />
+      <div className="relative z-10 min-h-screen w-full px-8 pt-10 lg:px-80">
+        <div>
+          <span className="font-Gabarito text-2xl font-semibold">
+            Expirymate
+          </span>
+        </div>
+        <div className="flex h-full flex-col items-center justify-center pt-24 text-center lg:pt-32">
+          <h1 className="font-Parkinsans text-4xl font-bold lg:text-7xl">
+            We Remember, <br />
+            So You Don’t Have To.
+          </h1>
+          <h3 className="font-Zain mt-6 text-xl/5 lg:mt-3 lg:text-2xl">
+            From coupons to insurance, never miss a date again. we’ll remind you
+            automatically.
+          </h3>
+          <Button
+            variant="default"
+            className="mt-8 rounded-2xl text-xl font-semibold lg:p-6 lg:text-2xl"
+          >
+            Try It Out
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };
