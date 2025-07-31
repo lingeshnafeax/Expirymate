@@ -21,14 +21,14 @@ const page = () => {
           backgroundRepeat: "no-repeat",
         }}
       />
-      <div className="relative z-10 min-h-screen w-full px-8 pt-10 lg:px-80">
+      <div className="relative z-10 min-h-screen w-full px-6 pt-10 lg:px-80">
         <div>
           <span className="font-Gabarito text-2xl font-semibold">
             Expirymate
           </span>
         </div>
         <div className="flex h-full flex-col items-center justify-center pt-24 text-center lg:pt-32">
-          <h1 className="font-Parkinsans text-4xl font-bold lg:text-7xl">
+          <h1 className="font-Outfit text-3xl font-extrabold lg:text-7xl/18">
             We Remember, <br />
             So You Don’t Have To.
           </h1>

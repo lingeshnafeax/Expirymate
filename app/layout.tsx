@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Zain, Gabarito, Parkinsans } from "next/font/google";
+import { Zain, Gabarito, Outfit } from "next/font/google";
 import "./globals.css";
 import { getLocale } from "next-intl/server";
 import { use } from "react";
@@ -19,10 +19,10 @@ const gabarito = Gabarito({
   display: "swap",
 });
 
-const parkinsans = Parkinsans({
+const outfit = Outfit({
   weight: ["300", "400", "700", "800"],
-  variable: "--font-parkinsans",
-  subsets: ["latin"],
+  variable: "--font-Outfit",
+  subsets: ["latin-ext"],
   display: "swap",
 });
 
@@ -41,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${zain.variable} ${gabarito.variable} ${parkinsans.variable} antialiased`}
+        className={`${zain.variable} ${gabarito.variable} ${outfit.variable} antialiased`}
       >
         <NextIntlClientProvider>
           <Navbar />
