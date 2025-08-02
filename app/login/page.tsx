@@ -2,9 +2,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { auth } from "@/lib/auth/auth-config";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
-import SignInForm from "@/components/client/form/auth/SignInForm";
+import SignInForm from "@/components/client/auth/SignInForm";
 import BackgroundGradient from "@/components/ui/BackgroundGradient";
-import SignUpForm from "@/components/client/form/auth/SignUpForm";
+import SignUpForm from "@/components/client/auth/SignUpForm";
 import { getTranslations } from "next-intl/server";
 
 const AuthenticationPage = async () => {
