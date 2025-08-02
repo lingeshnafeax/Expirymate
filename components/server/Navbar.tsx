@@ -8,14 +8,20 @@ const Navbar = () => {
   const t = useTranslations("homePage.navBar");
   const pathName = usePathname();
   if (pathName === "/") {
-    return null;
+    return (
+      <div className="font-rampartOne flex w-full items-center justify-between py-10 text-5xl font-semibold">
+        {t("title")}
+        <ThemeToggle />
+      </div>
+    );
+  } else {
+    return (
+      <div className="font-rampartOne flex w-full items-center justify-between py-10 text-5xl font-semibold">
+        {t("title")}
+        <ThemeToggle />
+      </div>
+    );
   }
-  return (
-    <div className="font-rampartOne flex w-full items-center justify-between p-10 text-5xl font-semibold">
-      {t("title")}
-      <ThemeToggle />
-    </div>
-  );
 };
 
 export default Navbar;

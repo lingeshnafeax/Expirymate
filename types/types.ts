@@ -17,7 +17,7 @@ interface IEmailAuth {
 
 export interface IEmailSignUp extends IEmailAuth {
   name: string;
-  callBackUrl: string;
+  callBackUrl?: string;
   image?: string;
 }
 

@@ -195,7 +195,7 @@
 
 body {
   letter-spacing: var(--tracking-normal);
-  font-family: var(--font-Zain)
+  font-family: var(--font-Zain);
 }
 
 @layer base {

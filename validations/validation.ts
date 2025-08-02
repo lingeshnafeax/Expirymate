@@ -5,12 +5,14 @@ export const signUpWithEmailSchema = z
       error: "Invalid email address",
     }),
     password: z
-      .string()
+      .string({ error: "Password is required" })
       .min(8, { error: "Password must be at least 8 characters long" })
       .max(64, { error: "Password must be at most 64 characters long" }),
-    name: z.string().min(1, { error: "Name is required" }),
+    name: z
+      .string({ error: "Name is required" })
+      .min(1, { error: "Name is required" }),
     confirmPassword: z
-      .string()
+      .string({ error: "Confirm password is required" })
       .min(1, { error: "Confirm password is required" }),
   })
   .superRefine(({ confirmPassword, password }, ctx) => {
@@ -18,6 +20,16 @@ export const signUpWithEmailSchema = z
       ctx.addIssue({
         code: "custom",
         message: "Passwords do not match",
+        path: ["confirmPassword"],
       });
     }
   });
+
+export const signInWithEmailSchema = z.object({
+  email: z.email({
+    error: "Invalid email address",
+  }),
+  password: z
+    .string({ error: "Password is required" })
+    .min(1, { error: "Password is required" }),
+});

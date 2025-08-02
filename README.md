@@ -37,3 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Use this to generate the auth schema
 npx @better-auth/cli@latest generate --output ./db/schemas/auth-schema.ts --config ./lib/auth/auth-config.ts
+npx drizzle-kit push

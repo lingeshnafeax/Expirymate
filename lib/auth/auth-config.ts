@@ -11,7 +11,6 @@ export const auth = betterAuth({
     },
   }),
 
-  secret: process.env.BETTER_AUTH_SECRET! || "",
   user: {
     additionalFields: {
       role: {
@@ -31,8 +30,8 @@ export const auth = betterAuth({
   socialProviders: {
     google: {
       prompt: "select_account",
-      clientId: process.env.GOOGLE_CLIENT_ID! || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET! || "",
+      clientId: process.env.GOOGLE_CLIENT_ID! ,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     },
   },
 });

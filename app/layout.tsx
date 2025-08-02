@@ -5,6 +5,7 @@ import { getLocale } from "next-intl/server";
 import { use } from "react";
 import Navbar from "@/components/server/Navbar";
 import { NextIntlClientProvider } from "next-intl";
+import { Toaster } from "sonner";
 
 const zain = Zain({
   weight: ["200", "300", "400", "700", "800", "900"],
@@ -41,9 +42,10 @@ export default function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${zain.variable} ${gabarito.variable} ${outfit.variable} antialiased`}
+        className={`${zain.variable} ${gabarito.variable} ${outfit.variable} px-5 antialiased xl:px-72`}
       >
         <NextIntlClientProvider>
+          <Toaster />
           <Navbar />
           {children}
         </NextIntlClientProvider>

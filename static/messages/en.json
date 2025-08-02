@@ -3,6 +3,55 @@
     "navBar": {
       "title": "Expirymate"
     },
-    "title": "Hello world!"
-  }
+    "heroSection": {
+      "title": "We Remember, <br />So You Don’t Have To.",
+      "description": "Never forget an expiry date again. Expirymate helps you keep track of your important dates effortlessly.",
+      "ctaButton": {
+        "text": "Get Started"
+      }
+    }
+  },
+  "authPage": {
+    "signInForm": {
+      "tabTitle": "Login",
+
+      "title": "Welcome back buddy!",
+      "description": "Let's go back where you left off.",
+      "fields": {
+        "email": {
+          "label": "Email"
+        },
+        "password": {
+          "label": "Password"
+        }
+      },
+      "submitButton": {
+        "text": "Login"
+      }
+    },
+    "signUpForm": {
+      "tabTitle": "Register",
+
+      "title": "Ahh guess who is new here!",
+      "description": "Let's get you onboard.",
+      "fields": {
+        "name": {
+          "label": "Name"
+        },
+        "email": {
+          "label": "Email"
+        },
+        "password": {
+          "label": "Password"
+        },
+        "confirmPassword": {
+          "label": "Confirm Password"
+        }
+      },
+      "submitButton": {
+        "text": "Register"
+      }
+    }
+  },
+  "toast": {}
 }
