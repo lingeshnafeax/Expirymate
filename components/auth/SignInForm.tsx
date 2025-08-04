@@ -21,6 +21,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
+import { signInWithEmailAndPassword } from "@/lib/auth/auth-client";
 const SignInForm = () => {
   const form = useForm<z.infer<typeof signInWithEmailSchema>>({
     resolver: zodResolver(signInWithEmailSchema),
@@ -28,7 +29,9 @@ const SignInForm = () => {
   const t = useTranslations("authPage.signInForm");
   const handleLoginUser = async (
     data: z.infer<typeof signInWithEmailSchema>,
-  ) => {};
+  ) => {
+    signInWithEmailAndPassword(data);
+  };
   return (
     <Card>
       <CardHeader>

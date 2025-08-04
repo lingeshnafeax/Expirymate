@@ -22,7 +22,6 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PasswordInput } from "@/components/ui/password-input";
 import { signUpWithEmailAndPassword } from "@/lib/auth/auth-client";
-import { toast } from "sonner";
 import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -36,13 +35,8 @@ const SignUpForm = () => {
   const handleRegisterUser = async (
     data: z.infer<typeof signUpWithEmailSchema>,
   ) => {
-    try {
-      await signUpWithEmailAndPassword(data);
-      router.push("/home");
-      toast.success("Let's goo! You are now registered.");
-    } catch {
-      toast.error("Oops something went wrong!");
-    }
+    await signUpWithEmailAndPassword(data);
+    router.push("/home");
   };
   return (
     <Card>

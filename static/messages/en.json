@@ -1,8 +1,5 @@
 {
   "homePage": {
-    "navBar": {
-      "title": "Expirymate"
-    },
     "heroSection": {
       "title": "We Remember, <br />So You Don’t Have To.",
       "description": "Never forget an expiry date again. Expirymate helps you keep track of your important dates effortlessly.",
@@ -53,5 +50,16 @@
       }
     }
   },
-  "toast": {}
+  "navBar": {
+    "title": "Expirymate",
+    "menu": {
+      "title": "Hi, {name}",
+      "menus": {
+        "profile": "Profile",
+        "settings": "Settings",
+        "darkMode": "Dark Mode",
+        "logout": "Logout"
+      }
+    }
+  }
 }

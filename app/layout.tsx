@@ -3,7 +3,7 @@ import { Zain, Gabarito, Outfit } from "next/font/google";
 import "./globals.css";
 import { getLocale } from "next-intl/server";
 import { use } from "react";
-import Navbar from "@/components/server/Navbar";
+import Navbar from "@/components/Navbar";
 import { NextIntlClientProvider } from "next-intl";
 import { Toaster } from "sonner";
 
@@ -42,12 +42,14 @@ export default function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${zain.variable} ${gabarito.variable} ${outfit.variable} px-5 antialiased xl:px-72`}
+        className={`${zain.variable} ${gabarito.variable} ${outfit.variable} antialiased`}
       >
         <NextIntlClientProvider>
-          <Toaster />
-          <Navbar />
-          {children}
+          <div className="px-5 xl:px-72">
+            <Toaster />
+            <Navbar />
+            {children}
+          </div>
         </NextIntlClientProvider>
       </body>
     </html>

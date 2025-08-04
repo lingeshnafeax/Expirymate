@@ -1,8 +1,7 @@
 import { Roles } from "@/types/types";
-import React, { ReactNode, useEffect } from "react";
-import { authClient } from "@/lib/auth/auth-client";
+import { ReactNode, useEffect } from "react";
 import { useRouter } from "next/router";
-const { useSession } = authClient;
+import useUser from "@/hooks/useUser";
 const ProtectedRoute = ({
   children,
   accessAllowedFor,
@@ -10,7 +9,7 @@ const ProtectedRoute = ({
   children: ReactNode;
   accessAllowedFor: Roles[];
 }) => {
-  const { data } = useSession();
+  const { data } = useUser();
   const router = useRouter();
 
   const checkAccess = () => {

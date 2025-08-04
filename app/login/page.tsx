@@ -2,11 +2,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { auth } from "@/lib/auth/auth-config";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
-import SignInForm from "@/components/client/auth/SignInForm";
+import SignInForm from "@/components/auth/SignInForm";
 import BackgroundGradient from "@/components/ui/BackgroundGradient";
-import SignUpForm from "@/components/client/auth/SignUpForm";
+import SignUpForm from "@/components/auth/SignUpForm";
 import { getTranslations } from "next-intl/server";
+import GoogleIcon from "@/components/ui/icons/GoogleIcon";
+import { Button } from "@/components/ui/button";
+import { signInWithGoogle } from "@/lib/auth/auth-client";
 
+
+//TODO: Change this to client component
 const AuthenticationPage = async () => {
   const t = await getTranslations("authPage");
   const session = await auth.api.getSession({
@@ -34,6 +39,10 @@ const AuthenticationPage = async () => {
           <TabsContent value="register">
             <SignUpForm />
           </TabsContent>
+          <Button variant="outline" onClick={signInWithGoogle} className="mt-6">
+            <p>Sign in with Google</p>
+            <GoogleIcon />
+          </Button>
         </Tabs>
       </div>
     </div>
