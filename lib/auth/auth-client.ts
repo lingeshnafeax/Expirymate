@@ -4,6 +4,7 @@ import { createAuthClient } from "better-auth/react";
 import { auth } from "./auth-config";
 import { IEmailSignIn, IEmailSignUp } from "@/types/types";
 import { toast } from "sonner";
+import { logger } from "@sentry/nextjs";
 
 export const authClient = createAuthClient({
   baseURL: process.env.BETTER_AUTH_URL,
@@ -17,16 +18,19 @@ const signInWithGoogle = async () => {
       callbackURL: "/home",
     },
     {
-      onSuccess: (ctx) => {
+      onSuccess: async (ctx) => {
         toast.success("Damn bro! Google let you in.");
-        console.log("Sign in successful:", console.dir(ctx));
+        logger.info("Google sign in successful", { context: ctx });
+        console.log("Google sign in successful", ctx);
       },
       onRequest: () => {
-        console.log("Sign in request initiated");
+        logger.info("Google sign in request initiated");
+        console.log("Google sign in request initiated");
       },
       onError: (ctx) => {
         toast.error("Oops something went wrong!");
-        console.error("Sign in error:", ctx);
+        logger.error("Google sign in error", { context: ctx });
+        console.log("Google sign in error", ctx);
       },
     },
   );
@@ -35,20 +39,22 @@ const signInWithGoogle = async () => {
 const signUpWithEmailAndPassword = async (props: IEmailSignUp) => {
   await authClient.signUp.email(
     {
-      callbackURL: "/home",
       ...props,
     },
     {
-      onSuccess: (ctx) => {
+      onSuccess: async (ctx) => {
         toast.success("Let's goo! You are now registered.");
-        console.log("Sign in successful:", console.dir(ctx));
+        logger.info("Sign up using email successful", { context: ctx });
+        console.log("Sign up using email successful", ctx);
       },
       onRequest: () => {
-        console.log("Sign in request initiated");
+        logger.info("Sign up using email request initiated");
+        console.log("Sign up using email request initiated");
       },
       onError: (ctx) => {
         toast.error("Oops something went wrong!");
-        console.error("Sign in error:", ctx);
+        logger.error("Sign up using email error", { context: ctx });
+        console.log("Sign up using email error", ctx);
       },
     },
   );
@@ -63,15 +69,18 @@ const signInWithEmailAndPassword = async (props: IEmailSignIn) => {
     {
       onSuccess: (ctx) => {
         toast.success("Looks like someone remembers their password.");
-        console.log("Sign in successful:", console.dir(ctx));
+        logger.info("Sign in with email successful", { context: ctx });
+        console.log("Sign in with email successful", ctx);
       },
       onRequest: () => {
-        console.log("Sign in request initiated");
+        logger.info("Sign in with email request initiated");
+        console.log("Sign in with email request initiated");
       },
 
       onError: (ctx) => {
         toast.error("Oops something went wrong!");
-        console.error("Sign in error:", ctx);
+        logger.error("Sign in with email error", { context: ctx });
+        console.log("Sign in with email error", ctx);
       },
     },
   );

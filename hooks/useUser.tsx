@@ -1,4 +1,5 @@
 import { authClient, signOut } from "@/lib/auth/auth-client";
+import { logger } from "@sentry/nextjs";
 import { useRouter } from "next/navigation";
 
 const useUser = () => {
@@ -10,7 +11,7 @@ const useUser = () => {
       await signOut();
       router.push("/");
     } catch (err) {
-      console.log("Error logging out user", err);
+      logger.error("Error logging out user", { error: err });
     }
   };
 

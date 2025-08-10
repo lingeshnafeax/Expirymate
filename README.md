@@ -36,5 +36,18 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 ## Use this to generate the auth schema
+
 npx @better-auth/cli@latest generate --output ./db/schemas/auth-schema.ts --config ./lib/auth/auth-config.ts
-npx drizzle-kit push
+
+## Changes to your db schema
+
+npx drizzle-kit generate - Generate migration files
+npx drizzle-kit migrate - Run migrations
+
+or
+
+npx drizzle-kit push - Does both the above
+
+## Use this to start the inngest dev server
+
+npx inngest-cli@latest dev

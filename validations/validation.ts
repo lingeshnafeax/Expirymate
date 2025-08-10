@@ -33,3 +33,24 @@ export const signInWithEmailSchema = z.object({
     .string({ error: "Password is required" })
     .min(1, { error: "Password is required" }),
 });
+
+export const fileUploadSchema = z.object({
+  file: z
+    .instanceof(File)
+    .refine(
+      (file) => {
+        console.log(file.type);
+        return [
+          // "application/pdf",
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+        ].includes(file.type);
+      },
+      { error: "Please upload JPG, JPEG or PNG file" },
+    )
+    .refine(
+      (file) => file.size <= 5 * 1024 * 1024, // 5MB limit
+      { error: "File size must be less than 5MB" },
+    ),
+});

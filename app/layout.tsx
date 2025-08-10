@@ -6,6 +6,7 @@ import { use } from "react";
 import Navbar from "@/components/Navbar";
 import { NextIntlClientProvider } from "next-intl";
 import { Toaster } from "sonner";
+import { ReactQueryProvider } from "@/lib/react-query";
 
 const zain = Zain({
   weight: ["200", "300", "400", "700", "800", "900"],
@@ -44,13 +45,15 @@ export default function RootLayout({
       <body
         className={`${zain.variable} ${gabarito.variable} ${outfit.variable} antialiased`}
       >
-        <NextIntlClientProvider>
-          <div className="px-5 xl:px-72">
-            <Toaster />
-            <Navbar />
-            {children}
-          </div>
-        </NextIntlClientProvider>
+        <ReactQueryProvider>
+          <NextIntlClientProvider>
+            <div className="px-5 xl:px-72">
+              <Toaster richColors />
+              <Navbar />
+              {children}
+            </div>
+          </NextIntlClientProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

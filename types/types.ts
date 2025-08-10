@@ -23,3 +23,22 @@ export interface IEmailSignUp extends IEmailAuth {
 export interface IEmailSignIn extends IEmailAuth {
   rememberMe?: boolean;
 }
+
+type InngestDataType<T> = {
+  data: T;
+  user: {
+    external_id: string;
+    email: string;
+  };
+};
+
+export type InngestEvents = {
+  "ai/scan.file": InngestDataType<IEncodedFileSchema>;
+};
+
+export interface IEncodedFileSchema {
+  name: string;
+  type: string;
+  size: number;
+  base64: string;
+}

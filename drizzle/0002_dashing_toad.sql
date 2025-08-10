@@ -1,0 +1,1 @@
+ALTER TABLE "files" ALTER COLUMN "fileCategory" SET DATA TYPE "public"."fileCategory";

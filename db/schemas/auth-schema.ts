@@ -21,6 +21,7 @@ export const user = pgTable("user", {
     .$defaultFn(() => /* @__PURE__ */ new Date())
     .notNull(),
   role: text("role").default("user"),
+  userDataId: text("user_data_id"),
 });
 
 export const session = pgTable("session", {

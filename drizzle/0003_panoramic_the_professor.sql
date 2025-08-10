@@ -1,0 +1,2 @@
+CREATE TYPE "public"."file_category" AS ENUM('Coupon Card', 'Document', 'Others');--> statement-breakpoint
+ALTER TABLE "files" ALTER COLUMN "fileCategory" SET DATA TYPE "public"."file_category" USING "fileCategory"::"public"."file_category";

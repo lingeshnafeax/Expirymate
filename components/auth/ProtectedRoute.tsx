@@ -14,7 +14,7 @@ const ProtectedRoute = ({
 
   const checkAccess = () => {
     if (!data?.user) {
-      // TODO: Redirect to login page
+      router.push("/login");
     } else if (data?.user.role) {
       const user = data.user.role as Roles;
       if (!accessAllowedFor.includes(user)) {
