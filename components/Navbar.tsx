@@ -18,11 +18,13 @@ import useUser from "@/hooks/useUser";
 import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
 import useTheme from "@/hooks/useTheme";
+import useSignOut from "@/hooks/api/useSignOut";
 
 const Navbar = () => {
   const t = useTranslations("navBar");
   const pathName = usePathname();
-  const { logOutUser, data } = useUser();
+  const { data } = useUser();
+  const { mutateAsync: signOut } = useSignOut();
   const { switchTheme, theme } = useTheme();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -65,7 +67,12 @@ const Navbar = () => {
               />
               <Label htmlFor="airplane-mode">{t("menu.menus.darkMode")}</Label>
             </DropdownMenuItem>
-            <DropdownMenuItem variant="destructive" onClick={logOutUser}>
+            <DropdownMenuItem
+              variant="destructive"
+              onClick={() => {
+                signOut();
+              }}
+            >
               {t("menu.menus.logout")}
             </DropdownMenuItem>
           </DropdownMenuContent>

@@ -15,6 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import useUploadFile from "@/hooks/api/useUploadFile";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 const Home = () => {
   const form = useForm<z.infer<typeof fileUploadSchema>>({
@@ -41,30 +42,32 @@ const Home = () => {
     }
   };
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name="file"
-          render={() => (
-            <FormItem className="grid gap-1">
-              <FormLabel>Upload a file</FormLabel>
-              <FormControl>
-                <Input
-                  onChange={handleFileChange}
-                  type="file"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button disabled={isPending} type="submit">
-          {isPending ? "Uploading..." : "Upload"}
-        </Button>
-      </form>
-    </Form>
+    <ProtectedRoute accessAllowedFor={["user", "admin"]}>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name="file"
+            render={() => (
+              <FormItem className="grid gap-1">
+                <FormLabel>Upload a file</FormLabel>
+                <FormControl>
+                  <Input
+                    onChange={handleFileChange}
+                    type="file"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button disabled={isPending} type="submit">
+            {isPending ? "Uploading..." : "Upload"}
+          </Button>
+        </form>
+      </Form>
+    </ProtectedRoute>
   );
 };
 

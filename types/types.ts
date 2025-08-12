@@ -10,20 +10,6 @@ export interface IAuthProvider {
   session: Session;
 }
 
-interface IEmailAuth {
-  email: string;
-  password: string;
-}
-
-export interface IEmailSignUp extends IEmailAuth {
-  name: string;
-  image?: string;
-}
-
-export interface IEmailSignIn extends IEmailAuth {
-  rememberMe?: boolean;
-}
-
 type InngestDataType<T> = {
   data: T;
   user: {

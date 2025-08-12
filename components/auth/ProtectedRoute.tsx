@@ -1,6 +1,7 @@
+"use client";
 import { Roles } from "@/types/types";
 import { ReactNode, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import useUser from "@/hooks/useUser";
 const ProtectedRoute = ({
   children,
@@ -13,7 +14,7 @@ const ProtectedRoute = ({
   const router = useRouter();
 
   const checkAccess = () => {
-    if (!data?.user) {
+    if (!data?.user || !data?.session) {
       router.push("/login");
     } else if (data?.user.role) {
       const user = data.user.role as Roles;

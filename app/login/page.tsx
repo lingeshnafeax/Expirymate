@@ -6,21 +6,22 @@ import BackgroundGradient from "@/components/ui/BackgroundGradient";
 import SignUpForm from "@/components/auth/SignUpForm";
 import GoogleIcon from "@/components/icons/GoogleIcon";
 import { Button } from "@/components/ui/button";
-import { signInWithGoogle } from "@/lib/auth/auth-client";
 import { useTranslations } from "next-intl";
 import useUser from "@/hooks/useUser";
 import { useEffect } from "react";
+import useSignInWithGmail from "@/hooks/api/useSignInWithGoogle";
 
 const AuthenticationPage = () => {
   const t = useTranslations("authPage");
   const session = useUser();
   const router = useRouter();
+  const { mutateAsync: signInWithGoogle } = useSignInWithGmail();
 
   useEffect(() => {
-    if (session.data?.session) {
+    if (session.data?.session && session.data?.user) {
       router.push("/home");
     }
-  }, [session.data?.session, router]);
+  }, [session, router]);
 
   return (
     <div className="relative min-h-screen w-full">
@@ -39,7 +40,11 @@ const AuthenticationPage = () => {
           <TabsContent value="register">
             <SignUpForm />
           </TabsContent>
-          <Button variant="outline" onClick={signInWithGoogle} className="mt-6">
+          <Button
+            variant="outline"
+            onClick={() => signInWithGoogle()}
+            className="mt-6"
+          >
             <p>Sign in with Google</p>
             <GoogleIcon />
           </Button>

@@ -21,22 +21,21 @@ import {
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PasswordInput } from "@/components/ui/password-input";
-import { signUpWithEmailAndPassword } from "@/lib/auth/auth-client";
 import { Loader } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import useSignUpWithEmail from "@/hooks/api/useSignUpWithEmail";
 const SignUpForm = () => {
-  const router = useRouter();
   const form = useForm<z.infer<typeof signUpWithEmailSchema>>({
     resolver: zodResolver(signUpWithEmailSchema),
   });
+  const { mutateAsync: signUpWithEmailAndPassword, isPending } =
+    useSignUpWithEmail();
   const t = useTranslations("authPage.signUpForm");
 
   const handleRegisterUser = async (
     data: z.infer<typeof signUpWithEmailSchema>,
   ) => {
     await signUpWithEmailAndPassword(data);
-    router.push("/home");
   };
   return (
     <Card>
@@ -105,12 +104,8 @@ const SignUpForm = () => {
               )}
             />
 
-            <Button type="submit" disabled={form.formState.isSubmitting}>
-              {form.formState.isSubmitting ? (
-                <Loader />
-              ) : (
-                t("submitButton.text")
-              )}
+            <Button type="submit" disabled={isPending}>
+              {isPending ? <Loader /> : t("submitButton.text")}
             </Button>
           </form>
         </Form>

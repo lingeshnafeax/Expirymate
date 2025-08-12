@@ -21,17 +21,21 @@ import {
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import { signInWithEmailAndPassword } from "@/lib/auth/auth-client";
+import useLoginWithEmail from "@/hooks/api/useLoginWithEmail";
+import { Loader } from "lucide-react";
 const SignInForm = () => {
   const form = useForm<z.infer<typeof signInWithEmailSchema>>({
     resolver: zodResolver(signInWithEmailSchema),
   });
   const t = useTranslations("authPage.signInForm");
-  const handleLoginUser = async (
+  const { mutateAsync: handleUserLogin, isPending } = useLoginWithEmail();
+
+  const handleLoginUserSubmit = async (
     data: z.infer<typeof signInWithEmailSchema>,
   ) => {
-    signInWithEmailAndPassword(data);
+    await handleUserLogin(data);
   };
+
   return (
     <Card>
       <CardHeader>
@@ -42,7 +46,7 @@ const SignInForm = () => {
         <Form {...form}>
           <form
             className="space-y-4"
-            onSubmit={form.handleSubmit(handleLoginUser)}
+            onSubmit={form.handleSubmit(handleLoginUserSubmit)}
           >
             <FormField
               control={form.control}
@@ -71,7 +75,9 @@ const SignInForm = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit">{t("submitButton.text")}</Button>
+            <Button disabled={isPending} type="submit">
+              {isPending ? <Loader /> : t("submitButton.text")}
+            </Button>
           </form>
         </Form>
       </CardContent>
