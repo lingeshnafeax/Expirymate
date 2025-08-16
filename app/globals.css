@@ -161,6 +161,7 @@
   --font-Zain: Zain;
   --font-Gabarito: Gabarito;
   --font-Outfit: Outfit;
+  /* Title */
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

@@ -1,4 +1,6 @@
-import { session, user } from "@/db";
+import { insertFileSchema, session, user } from "@/db";
+import { APP_ROUTES } from "@/static/constants/constants";
+import z from "zod";
 
 type User = typeof user.$inferInsert;
 type Session = typeof session.$inferInsert;
@@ -28,3 +30,7 @@ export interface IEncodedFileSchema {
   size: number;
   base64: string;
 }
+
+export type FileCardProps = z.infer<typeof insertFileSchema>;
+
+export type AppRoutes = `${APP_ROUTES}`;

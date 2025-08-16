@@ -1,5 +1,5 @@
 "use client";
-import ThemeToggle from "./ThemeToggle";
+import ThemeToggle from "../utility/ThemeToggle";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 
@@ -12,11 +12,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import AvatarTypography from "./AvatarTypography";
+import AvatarTypography from "../utility/AvatarTypography";
 import { useEffect, useState } from "react";
 import useUser from "@/hooks/useUser";
-import { Switch } from "./ui/switch";
-import { Label } from "./ui/label";
+import { Switch } from "../ui/switch";
+import { Label } from "../ui/label";
 import useTheme from "@/hooks/useTheme";
 import useSignOut from "@/hooks/api/useSignOut";
 

@@ -36,7 +36,7 @@ export const signInWithEmailSchema = z.object({
 
 export const fileUploadSchema = z.object({
   file: z
-    .instanceof(File)
+    .instanceof(File, { error: "File is required." })
     .refine(
       (file) => {
         console.log(file.type);

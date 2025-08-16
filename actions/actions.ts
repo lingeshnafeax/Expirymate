@@ -10,7 +10,8 @@ import {
 } from "@/static/constants/constants";
 import { Type } from "@google/genai";
 import { gemini } from "@/lib/gemini";
-import { splitBase64String } from "@/lib/utils";
+import { splitBase64String } from "@/utils/client";
+import { fakeGeminiScanResponse } from "@/static/constants/stubs";
 
 export const uploadFileToS3 = async (data: IEncodedFileSchema) => {
   try {
@@ -56,51 +57,55 @@ export const scanFileWithGemini = async (
   fileType: string,
 ) => {
   try {
-    const response = await gemini.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: [
-        {
-          inlineData: {
-            mimeType: fileType,
-            data: base64String,
-          },
-        },
-      ],
-      config: {
-        systemInstruction:
-          "You need to scan the file that is given to you and extract many informations from the file. The expiry date, file category are the most important. Send date in dd/mm/yyyy format.",
-
-        responseMimeType: "application/json",
-        responseSchema: {
-          type: Type.OBJECT,
-          properties: {
-            fileCategory: {
-              type: Type.STRING,
-              enum: FileCategories,
-            },
-            expiryDate: { type: Type.STRING },
-            title: { type: Type.STRING },
-            description: { type: Type.STRING, nullable: true },
-            couponCode: { type: Type.STRING, nullable: true },
-            issuer: { type: Type.STRING, nullable: true },
-            issueDate: { type: Type.STRING, nullable: true },
-            value: { type: Type.STRING, nullable: true },
-            discountInfo: { type: Type.STRING, nullable: true },
-            otherInfo: {
-              type: Type.ARRAY,
-              items: { type: Type.STRING },
-            },
-            termsAndCondition: {
-              type: Type.ARRAY,
-              items: { type: Type.STRING },
-              nullable: true,
+    if (process.env.NODE_ENV == "development") {
+      return fakeGeminiScanResponse;
+    } else {
+      const response = await gemini.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: [
+          {
+            inlineData: {
+              mimeType: fileType,
+              data: base64String,
             },
           },
-        },
-      },
-    });
+        ],
+        config: {
+          systemInstruction:
+            "You need to scan the file that is given to you and extract many informations from the file. The expiry date, file category are the most important. Send date in dd/mm/yyyy format.",
 
-    return JSON.parse(response.text!) as unknown;
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: Type.OBJECT,
+            properties: {
+              fileCategory: {
+                type: Type.STRING,
+                enum: FileCategories,
+              },
+              expiryDate: { type: Type.STRING },
+              title: { type: Type.STRING },
+              description: { type: Type.STRING, nullable: true },
+              couponCode: { type: Type.STRING, nullable: true },
+              issuer: { type: Type.STRING, nullable: true },
+              issueDate: { type: Type.STRING, nullable: true },
+              value: { type: Type.STRING, nullable: true },
+              discountInfo: { type: Type.STRING, nullable: true },
+              otherInfo: {
+                type: Type.ARRAY,
+                items: { type: Type.STRING },
+              },
+              termsAndCondition: {
+                type: Type.ARRAY,
+                items: { type: Type.STRING },
+                nullable: true,
+              },
+            },
+          },
+        },
+      });
+
+      return JSON.parse(response.text!) as unknown;
+    }
   } catch (err) {
     logger.error("Error scanning file with gemini", { error: err });
     console.log("Error scanning file with gemini", err);

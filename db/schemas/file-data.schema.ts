@@ -35,3 +35,5 @@ export const fileSchemaRelations = relations(fileSchema, ({ one }) => ({
 }));
 
 export const createFileSchema = createInsertSchema(fileSchema);
+
+export const insertFileSchema = createInsertSchema(fileSchema);
