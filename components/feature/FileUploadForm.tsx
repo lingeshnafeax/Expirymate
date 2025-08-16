@@ -14,7 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import useUploadFile from "@/hooks/api/useUploadFile";
+
 import { FileIcon, Upload, X } from "lucide-react";
 import {
   Dialog,
@@ -35,6 +35,8 @@ import {
   FileUploadTrigger,
 } from "@/components/ui/file-upload";
 import { toast } from "sonner";
+import { uploadFile } from "@/actions/actions";
+
 const FileUploadForm = () => {
   const form = useForm<z.infer<typeof fileUploadSchema>>({
     resolver: zodResolver(fileUploadSchema),
@@ -44,8 +46,6 @@ const FileUploadForm = () => {
 
   const [fileUploadDialogOpen, setFileUploadDialogOpen] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
-
-  const { mutateAsync: uploadFile, isPending } = useUploadFile();
 
   const onFileReject = (_: File, message: string) => {
     toast.error(message);
@@ -61,7 +61,12 @@ const FileUploadForm = () => {
   };
 
   const onSubmit = async (data: z.infer<typeof fileUploadSchema>) => {
-    await uploadFile(data);
+    const response = await uploadFile(data);
+    if (response.success) {
+      toast.success("File scanned! It will be in your dashboard soon.");
+    } else {
+      toast.error("Something went wrong! Please try again.");
+    }
     setFileUploadDialogOpen(false);
     form.reset();
     setFiles([]);
@@ -151,11 +156,11 @@ const FileUploadForm = () => {
                 )}
               />
               <Button
-                disabled={isPending}
+                disabled={form.formState.isSubmitting}
                 type="submit"
                 className="w-full text-xl font-semibold"
               >
-                {isPending ? "Processing..." : "Submit"}
+                {form.formState.isSubmitting ? "Processing..." : "Submit"}
               </Button>
             </form>
           </Form>

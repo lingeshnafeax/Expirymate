@@ -1,3 +1,4 @@
+"use client";
 import { authClient } from "@/lib/auth/auth-client";
 
 const useUser = () => {

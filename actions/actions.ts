@@ -1,3 +1,4 @@
+"use server";
 import { s3 } from "@/lib/s3";
 import { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 import { randomUUID } from "crypto";
@@ -10,8 +11,12 @@ import {
 } from "@/static/constants/constants";
 import { Type } from "@google/genai";
 import { gemini } from "@/lib/gemini";
-import { splitBase64String } from "@/utils/client";
+import { splitBase64String } from "@/utils/helper";
 import { fakeGeminiScanResponse } from "@/static/constants/stubs";
+import { fileUploadSchema } from "@/validations/validation";
+import { convertFileToBase64, getUserServerSession } from "@/utils/server";
+import z from "zod";
+import { inngest } from "@/lib/inngest";
 
 export const uploadFileToS3 = async (data: IEncodedFileSchema) => {
   try {
@@ -128,4 +133,30 @@ export const getSignedS3Url = async ({
     expiresIn: expTimeMinutes,
   });
   return signedUrl;
+};
+
+export const uploadFile = async (data: z.infer<typeof fileUploadSchema>) => {
+  const userData = await getUserServerSession();
+  const base64 = await convertFileToBase64(data.file);
+  if (userData) {
+    try {
+      const response = await inngest.send({
+        name: "ai/scan.file",
+        data: {
+          name: data.file.name,
+          type: data.file.type,
+          size: data.file.size,
+          base64,
+        },
+        user: {
+          external_id: userData?.user.id,
+          email: userData?.user.email,
+        },
+      });
+      return { response, success: true };
+    } catch {
+      return { success: false };
+    }
+  }
+  return { success: false };
 };

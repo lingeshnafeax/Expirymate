@@ -10,7 +10,8 @@ export const scanPdf = inngest.createFunction(
       const response = await uploadFileToS3(event.data);
       return response;
     });
-    const uploadFileToGemini = await step.run( // TODO: Handle PDF Upload
+    const uploadFileToGemini = await step.run(
+      // TODO: Handle PDF Upload
       "scan-file-with-gemini",
       async () => {
         if (fileData && fileData.success) {
@@ -22,7 +23,7 @@ export const scanPdf = inngest.createFunction(
         }
       },
     );
-     await step.run("store-file-data-in-db", async () => {
+    await step.run("store-file-data-in-db", async () => {
       if (fileData) {
         const [userFileData] =
           (await createUserFileData(

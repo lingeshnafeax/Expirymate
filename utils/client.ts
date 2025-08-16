@@ -13,7 +13,4 @@ export async function getRunOutput(eventId: string) {
   return runs;
 }
 
-export const splitBase64String = (data: string) => {
-  return data.includes(",") ? data.split(",")[1] : data;
-};
 
