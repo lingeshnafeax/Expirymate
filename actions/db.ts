@@ -1,6 +1,6 @@
 import { createFileSchema, fileSchema, user, userData } from "@/db";
 import { db } from "@/lib/drizzle";
-import { fakeDBFileCreationResponse } from "@/static/constants/stubs";
+import { fakeDBFileCreationResponse } from "@/constants/constants/stubs";
 import { logger } from "better-auth";
 import { eq } from "drizzle-orm";
 
@@ -20,29 +20,34 @@ export const createUserFileData = async (
   if (process.env.NODE_ENV === "development") {
     return fakeDBFileCreationResponse;
   } else {
-    const parsedData = createFileSchema
-      .omit({ userDataId: true, uri: true })
-      .safeParse(data);
+    try {
+      const parsedData = createFileSchema
+        .omit({ userDataId: true, uri: true })
+        .safeParse(data);
 
-    const userFileData = await db.query.userData.findFirst({
-      where: eq(userData.userId, userId),
-    });
-
-    if (parsedData.success && userFileData) {
-      const fileData = await db
-        .insert(fileSchema)
-        .values({
-          ...parsedData.data,
-          userDataId: userFileData.id,
-          uri,
-        })
-        .returning();
-      return fileData;
-    } else {
-      logger.error("Error creating user file data", {
-        error: parsedData.error,
+      const userFileData = await db.query.userData.findFirst({
+        where: eq(userData.userId, userId),
       });
-      console.log(parsedData.error);
+
+      if (parsedData.success && userFileData) {
+        const fileData = await db
+          .insert(fileSchema)
+          .values({
+            ...parsedData.data,
+            userDataId: userFileData.id,
+            uri,
+          })
+          .returning();
+        return fileData;
+      } else {
+        logger.error("Error creating user file data", {
+          error: parsedData.error,
+        });
+        console.log(parsedData.error);
+      }
+    } catch (err) {
+      logger.error("Error creating user file data", { error: err });
+      console.log(err);
     }
   }
 };

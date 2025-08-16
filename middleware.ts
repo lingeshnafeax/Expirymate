@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { AppRoutes, Roles } from "./types/types";
-import { ACCESS_CONTROL, APP_ROUTES } from "./static/constants/constants";
+import { ACCESS_CONTROL, APP_ROUTES } from "./constants/constants/constants";
 import { getUserServerSession } from "./utils/server";
 
 export default async function middleware(request: NextRequest) {

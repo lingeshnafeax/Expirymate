@@ -130,6 +130,7 @@ const FileUploadForm = () => {
                           {files.map((file, index) => (
                             <FileUploadItem key={index} value={file}>
                               <FileUploadItemPreview />
+                              {/* // TODO: Trim title length */}
                               <FileUploadItemMetadata />
                               <FileUploadItemDelete
                                 onClick={() => {

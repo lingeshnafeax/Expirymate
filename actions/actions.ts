@@ -8,11 +8,11 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import {
   FileCategories,
   S3_SIGNED_URL_EXPIRATION_TIME,
-} from "@/static/constants/constants";
+} from "@/constants/constants/constants";
 import { Type } from "@google/genai";
 import { gemini } from "@/lib/gemini";
 import { splitBase64String } from "@/utils/helper";
-import { fakeGeminiScanResponse } from "@/static/constants/stubs";
+import { fakeGeminiScanResponse } from "@/constants/constants/stubs";
 import { fileUploadSchema } from "@/validations/validation";
 import { convertFileToBase64, getUserServerSession } from "@/utils/server";
 import z from "zod";
@@ -54,6 +54,7 @@ export const uploadFileToS3 = async (data: IEncodedFileSchema) => {
   } catch (err) {
     logger.error("Error uploading file to S3", { error: err });
     console.log("Error uploading file to S3", err);
+    return { success: false, error: err };
   }
 };
 
@@ -62,7 +63,7 @@ export const scanFileWithGemini = async (
   fileType: string,
 ) => {
   try {
-    if (process.env.NODE_ENV == "development") {
+    if (process.env.NODE_ENV === "development") {
       return fakeGeminiScanResponse;
     } else {
       const response = await gemini.models.generateContent({
@@ -114,6 +115,7 @@ export const scanFileWithGemini = async (
   } catch (err) {
     logger.error("Error scanning file with gemini", { error: err });
     console.log("Error scanning file with gemini", err);
+    return { success: false, error: err };
   }
 };
 
@@ -154,9 +156,9 @@ export const uploadFile = async (data: z.infer<typeof fileUploadSchema>) => {
         },
       });
       return { response, success: true };
-    } catch {
-      return { success: false };
+    } catch (err) {
+      return { success: false, error: err };
     }
   }
-  return { success: false };
+  return { success: false, error: "User data not available" };
 };

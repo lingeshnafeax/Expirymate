@@ -1,5 +1,5 @@
 import { insertFileSchema, session, user } from "@/db";
-import { APP_ROUTES } from "@/static/constants/constants";
+import { APP_ROUTES } from "@/constants/constants/constants";
 import z from "zod";
 
 type User = typeof user.$inferInsert;

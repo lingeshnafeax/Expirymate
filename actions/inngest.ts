@@ -14,7 +14,7 @@ export const scanPdf = inngest.createFunction(
       // TODO: Handle PDF Upload
       "scan-file-with-gemini",
       async () => {
-        if (fileData && fileData.success) {
+        if (fileData && fileData.success && "fileType" in fileData) {
           const geminiResponse = await scanFileWithGemini(
             fileData.base64String,
             fileData.fileType,
@@ -24,7 +24,7 @@ export const scanPdf = inngest.createFunction(
       },
     );
     await step.run("store-file-data-in-db", async () => {
-      if (fileData) {
+      if (fileData && "fileName" in fileData) {
         const [userFileData] =
           (await createUserFileData(
             uploadFileToGemini,

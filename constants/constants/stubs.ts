@@ -22,7 +22,7 @@ export const fakeDBFileCreationResponse = [
 ];
 
 export const fakeGeminiScanResponse = {
-  couponCode: "AFFLGPA-ZPXMU6NQA",
+  couponCode: "Stub-jkdwhdflewhfewA",
   description: "Gold max membership for 1 year worth ₹800",
   discountInfo:
     "5% Cashback on all orders. 10% off on Aqualens Contact Lenses.",
