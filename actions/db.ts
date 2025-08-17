@@ -1,7 +1,7 @@
 import { insertFileSchema, fileSchema } from "@/db";
 import { db } from "@/lib/drizzle";
 import { fakeDBFileCreationResponse } from "@/constants/constants/stubs";
-import { logger } from "better-auth";
+import { logger } from "@sentry/nextjs";
 import { eq } from "drizzle-orm";
 
 export const createUserFileData = async (
@@ -28,7 +28,7 @@ export const createUserFileData = async (
           .returning();
         return fileData;
       } else {
-        logger.error("Error creating user file data", {
+        logger.error("Error while parsing the file data.", {
           error: parsedData.error,
         });
         console.log(parsedData.error);

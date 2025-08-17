@@ -78,7 +78,7 @@ export const scanFileWithGemini = async (
         ],
         config: {
           systemInstruction:
-            "You need to scan the file that is given to you and extract many informations from the file. The expiry date, file category are the most important. Send date in dd/mm/yyyy format.",
+            "You need to scan the file that is given to you and extract many informations from the file. The expiry date, file category are the most important. Send date in yyyy/mm/dd format.",
 
           responseMimeType: "application/json",
           responseSchema: {

@@ -6,10 +6,10 @@ import { differenceInCalendarDays } from "date-fns";
 const FileCard = ({ cardData }: { cardData: FileCardProps }) => {
   return (
     <Card>
-      <CardContent className="flex flex-row justify-between">
+      <CardContent className="flex flex-row justify-between gap-y-2">
         <div className="space-y-3">
           <div className="">
-            <CardHeader className="text-xl font-semibold px-0 ">
+            <CardHeader className="px-0 text-xl font-semibold">
               {cardData.issuer}
             </CardHeader>
             <Badge>{cardData.fileCategory}</Badge>
@@ -17,12 +17,12 @@ const FileCard = ({ cardData }: { cardData: FileCardProps }) => {
           <CardDescription>{cardData.description}</CardDescription>
         </div>
         <div>
-          <span>Expires in</span>
+          <span className="text-nowrap">Expires in</span>
           <div className="flex flex-col items-end">
             <p className="text-right text-2xl font-semibold">
               {differenceInCalendarDays(
-                new Date(),
                 new Date(cardData.expiryDate),
+                new Date(),
               )}
             </p>
             <span className="-mt-2">days</span>
