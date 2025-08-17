@@ -138,10 +138,10 @@ export const getSignedS3Url = async ({
 };
 
 export const uploadFile = async (data: z.infer<typeof fileUploadSchema>) => {
-  const userData = await getUserServerSession();
-  const base64 = await convertFileToBase64(data.file);
-  if (userData) {
-    try {
+  try {
+    const userData = await getUserServerSession();
+    const base64 = await convertFileToBase64(data.file);
+    if (userData) {
       const response = await inngest.send({
         name: "ai/scan.file",
         data: {
@@ -156,9 +156,10 @@ export const uploadFile = async (data: z.infer<typeof fileUploadSchema>) => {
         },
       });
       return { response, success: true };
-    } catch (err) {
-      return { success: false, error: err };
     }
+    logger.error("User not found", { error: "User not found" });
+  } catch (err) {
+    logger.error("Error uploading file", { error: err });
+    return { success: false, error: err };
   }
-  return { success: false, error: "User data not available" };
 };
