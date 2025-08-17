@@ -158,6 +158,7 @@ export const uploadFile = async (data: z.infer<typeof fileUploadSchema>) => {
       return { response, success: true };
     }
     logger.error("User not found", { error: "User not found" });
+    return { success: false, message: "User data not found!" };
   } catch (err) {
     logger.error("Error uploading file", { error: err });
     return { success: false, error: err };

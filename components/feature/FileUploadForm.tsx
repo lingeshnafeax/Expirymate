@@ -62,7 +62,7 @@ const FileUploadForm = () => {
 
   const onSubmit = async (data: z.infer<typeof fileUploadSchema>) => {
     const response = await uploadFile(data);
-    if (response.success) {
+    if (response && response.success) {
       toast.success("File scanned! It will be in your dashboard soon.");
     } else {
       toast.error("Something went wrong! Please try again.");
