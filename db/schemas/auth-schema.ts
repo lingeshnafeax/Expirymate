@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import {
   pgTable,
   text,
@@ -5,6 +6,7 @@ import {
   boolean,
   integer,
 } from "drizzle-orm/pg-core";
+import { fileSchema } from "./file-data.schema";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -21,8 +23,11 @@ export const user = pgTable("user", {
     .$defaultFn(() => /* @__PURE__ */ new Date())
     .notNull(),
   role: text("role").default("user"),
-  userDataId: text("user_data_id"),
 });
+
+export const userSchemaRelations = relations(user, ({ many }) => ({
+  files: many(fileSchema),
+}));
 
 export const session = pgTable("session", {
   id: text("id").primaryKey(),

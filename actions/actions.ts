@@ -151,7 +151,7 @@ export const uploadFile = async (data: z.infer<typeof fileUploadSchema>) => {
           base64,
         },
         user: {
-          external_id: userData?.user.id,
+          userId: userData?.user.id,
           email: userData?.user.email,
         },
       });

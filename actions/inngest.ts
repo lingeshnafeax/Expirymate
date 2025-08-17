@@ -28,7 +28,7 @@ export const scanPdf = inngest.createFunction(
         const [userFileData] =
           (await createUserFileData(
             uploadFileToGemini,
-            event.user.external_id,
+            event.user.userId,
             fileData?.fileName,
           )) ?? [];
         return userFileData;

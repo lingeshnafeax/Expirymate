@@ -1,17 +1,17 @@
 import { pgTable, uuid, text, pgEnum, date, jsonb } from "drizzle-orm/pg-core";
-import { userData } from "./user-data-schema";
 import { relations } from "drizzle-orm";
 import { FileCategories } from "@/constants/constants/constants";
 import { createInsertSchema } from "drizzle-zod";
+import { user } from "./auth-schema";
 
 export const fileCategoryEnum = pgEnum("file_category", FileCategories);
 
 export const fileSchema = pgTable("files", {
   id: uuid("id").defaultRandom().primaryKey(),
   uri: text("uri").notNull(),
-  userDataId: uuid("user_data_id")
+  userId: text("user_id")
     .notNull()
-    .references(() => userData.id, { onDelete: "cascade" }),
+    .references(() => user.id, { onDelete: "cascade" }),
 
   fileCategory: fileCategoryEnum().notNull(),
   expiryDate: date("expiry_date").notNull(),
@@ -28,12 +28,10 @@ export const fileSchema = pgTable("files", {
 });
 
 export const fileSchemaRelations = relations(fileSchema, ({ one }) => ({
-  userData: one(userData, {
-    fields: [fileSchema.userDataId],
-    references: [userData.id],
+  user: one(user, {
+    fields: [fileSchema.userId],
+    references: [user.id],
   }),
 }));
-
-export const createFileSchema = createInsertSchema(fileSchema);
 
 export const insertFileSchema = createInsertSchema(fileSchema);

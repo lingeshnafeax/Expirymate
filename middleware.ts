@@ -8,7 +8,7 @@ export default async function middleware(request: NextRequest) {
     const userSession = await getUserServerSession();
 
     const { pathname } = request.nextUrl;
-    const isLoggedIn = !!(userSession?.session && userSession.user);
+    const isLoggedIn = !!(userSession?.session && userSession?.user);
 
     if (pathname === APP_ROUTES.LOGIN && isLoggedIn) {
       return NextResponse.redirect(new URL(APP_ROUTES.HOME, request.url));
@@ -35,4 +35,5 @@ export default async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: ["/home", "/login"] satisfies AppRoutes[],
+  runtime: "nodejs",
 };

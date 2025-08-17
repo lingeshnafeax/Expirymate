@@ -5,7 +5,7 @@ import { getUserServerSession } from "@/utils/server";
 const page = async () => {
   const session = await getUserServerSession();
 
-  const userFiles = await getUserFiles(session!.user.userDataId!); //? Asserting here since this logic is already handled in middleware
+  const userFiles = await getUserFiles(session!.user?.id); //? Asserting here since this logic is already handled in middleware
   return (
     <div className="my-4 grid gap-6 md:grid-cols-2">
       {userFiles.map((userFile) => {

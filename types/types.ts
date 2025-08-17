@@ -15,7 +15,7 @@ export interface IAuthProvider {
 type InngestDataType<T> = {
   data: T;
   user: {
-    external_id: string;
+    userId: string;
     email: string;
   };
 };

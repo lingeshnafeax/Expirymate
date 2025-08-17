@@ -1,16 +1,8 @@
-import { createFileSchema, fileSchema, user, userData } from "@/db";
+import { insertFileSchema, fileSchema } from "@/db";
 import { db } from "@/lib/drizzle";
 import { fakeDBFileCreationResponse } from "@/constants/constants/stubs";
 import { logger } from "better-auth";
 import { eq } from "drizzle-orm";
-
-export const createUserAfterAuth = async (id: string) => {
-  const [userDataId] = await db
-    .insert(userData)
-    .values({ userId: id })
-    .returning({ insertedId: userData.id });
-  await db.update(user).set({ userDataId: userDataId.insertedId }).returning();
-};
 
 export const createUserFileData = async (
   data: unknown,
@@ -21,20 +13,16 @@ export const createUserFileData = async (
     return fakeDBFileCreationResponse;
   } else {
     try {
-      const parsedData = createFileSchema
-        .omit({ userDataId: true, uri: true })
+      const parsedData = insertFileSchema
+        .omit({ userId: true, uri: true })
         .safeParse(data);
 
-      const userFileData = await db.query.userData.findFirst({
-        where: eq(userData.userId, userId),
-      });
-
-      if (parsedData.success && userFileData) {
+      if (parsedData.success) {
         const fileData = await db
           .insert(fileSchema)
           .values({
             ...parsedData.data,
-            userDataId: userFileData.id,
+            userId,
             uri,
           })
           .returning();
@@ -52,10 +40,10 @@ export const createUserFileData = async (
   }
 };
 
-export const getUserFiles = async (userDataId: string) => {
+export const getUserFiles = async (userId: string) => {
   const userFileData = await db
     .select()
     .from(fileSchema)
-    .where(eq(fileSchema.userDataId, userDataId));
+    .where(eq(fileSchema.userId, userId));
   return userFileData;
 };
