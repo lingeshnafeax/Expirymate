@@ -1,11 +1,15 @@
 import { getUserFiles } from "@/actions/db";
-import FileCard from "@/components/feature/FileCard";
+import { DEFAULT_NO_OF_FILES_TO_FETCH } from "@/constants";
 import { getUserServerSession } from "@/utils/server";
+import FileCard from "@/components/feature/Home/File/FileCard";
 
 const page = async () => {
   const session = await getUserServerSession();
 
-  const userFiles = await getUserFiles(session!.user?.id); //? Asserting here since this logic is already handled in middleware
+  const userFiles = await getUserFiles(
+    session!.user?.id,
+    DEFAULT_NO_OF_FILES_TO_FETCH,
+  ); //? Asserting here since this logic is already handled in middleware
   return (
     <div className="my-4 grid gap-6 md:grid-cols-2">
       {userFiles.map((userFile) => {

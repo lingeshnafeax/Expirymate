@@ -1,6 +1,6 @@
 import { pgTable, uuid, text, pgEnum, date, jsonb } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
-import { FileCategories } from "@/constants/constants/constants";
+import { FileCategories } from "@/constants";
 import { createInsertSchema } from "drizzle-zod";
 import { user } from "./auth-schema";
 

@@ -1,7 +1,12 @@
 import { FileCardProps } from "@/types/types";
 import React from "react";
-import { Card, CardContent, CardDescription, CardHeader } from "../ui/card";
-import { Badge } from "../ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { differenceInCalendarDays } from "date-fns";
 const FileCard = ({ cardData }: { cardData: FileCardProps }) => {
   return (

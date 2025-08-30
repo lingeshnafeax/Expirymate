@@ -36,6 +36,9 @@ import {
 } from "@/components/ui/file-upload";
 import { toast } from "sonner";
 import { uploadFile } from "@/actions/actions";
+import { compressFile } from "@/utils/client";
+import { logger } from "@sentry/nextjs";
+import { parseError } from "@/utils/helper";
 
 const FileUploadForm = () => {
   const form = useForm<z.infer<typeof fileUploadSchema>>({
@@ -61,15 +64,17 @@ const FileUploadForm = () => {
   };
 
   const onSubmit = async (data: z.infer<typeof fileUploadSchema>) => {
-    const response = await uploadFile(data);
-    if (response && response.success) {
-      toast.success("File scanned! It will be in your dashboard soon.");
-    } else {
+    try {
+      const compressedFile = await compressFile(data.file);
+      await uploadFile({ file: compressedFile });
+      setFileUploadDialogOpen(false);
+      form.reset();
+      setFiles([]);
+    } catch (err) {
+      console.error(err);
       toast.error("Something went wrong! Please try again.");
+      logger.error("File upload failed", parseError(err));
     }
-    setFileUploadDialogOpen(false);
-    form.reset();
-    setFiles([]);
   };
   return (
     <>

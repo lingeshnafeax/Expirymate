@@ -3,7 +3,7 @@ import { Zain, Gabarito, Outfit } from "next/font/google";
 import "./globals.css";
 import { getLocale } from "next-intl/server";
 import { use } from "react";
-import Navbar from "@/components/feature/Navbar";
+import Navbar from "@/components/utility/Navbar";
 import { NextIntlClientProvider } from "next-intl";
 import { Toaster } from "sonner";
 import { ReactQueryProvider } from "@/lib/react-query";

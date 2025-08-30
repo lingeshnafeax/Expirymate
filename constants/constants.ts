@@ -15,3 +15,7 @@ export const ACCESS_CONTROL: Record<Roles, string[]> = {
   user: ["/home"] satisfies AppRoutes[],
   admin: ["/home"] satisfies AppRoutes[],
 };
+
+export const MAXIMUM_FILE_SIZE_KB = 120;
+
+export const DEFAULT_NO_OF_FILES_TO_FETCH = 4;
