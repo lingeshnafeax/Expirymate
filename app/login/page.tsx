@@ -24,10 +24,10 @@ const AuthenticationPage = () => {
   }, [session, router]);
 
   return (
-    <div className="relative min-h-screen w-full">
+    <div className="relative w-full">
       <BackgroundGradient />
-      <div className="relative z-10 md:px-20 lg:px-40">
-        <Tabs defaultValue="login" className="text-xl">
+      <div className="relative z-10 flex justify-center">
+        <Tabs defaultValue="login" className="w-full max-w-[600px] text-xl">
           <TabsList className="mb-4 flex w-full justify-center lg:mb-8">
             <TabsTrigger value="login">{t("signInForm.tabTitle")}</TabsTrigger>
             <TabsTrigger value="register">

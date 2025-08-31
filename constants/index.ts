@@ -5,4 +5,6 @@ export {
   FileCategories,
   MAXIMUM_FILE_SIZE_KB,
   S3_SIGNED_URL_EXPIRATION_TIME,
+  allowedFileTypes,
+  EXTERNAL_LINKS,
 } from "./constants";

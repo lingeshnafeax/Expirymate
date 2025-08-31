@@ -1154,7 +1154,7 @@ function FileUploadItemMetadata(props: FileUploadItemMetadataProps) {
           <span
             id={itemContext.nameId}
             className={cn(
-              "truncate text-sm font-medium",
+              "sm:max-w-auto w-auto max-w-[150px] truncate text-sm font-medium",
               size === "sm" && "text-[13px] leading-snug font-normal",
             )}
           >

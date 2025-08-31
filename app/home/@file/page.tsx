@@ -2,7 +2,6 @@ import { getUserFiles } from "@/actions/db";
 import { DEFAULT_NO_OF_FILES_TO_FETCH } from "@/constants";
 import { getUserServerSession } from "@/utils/server";
 import FileCard from "@/components/feature/Home/File/FileCard";
-
 const page = async () => {
   const session = await getUserServerSession();
 

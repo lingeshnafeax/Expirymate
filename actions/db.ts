@@ -1,4 +1,4 @@
-import { desc } from "drizzle-orm";
+import { asc } from "drizzle-orm";
 import { insertFileSchema, fileSchema } from "@/db";
 import { db } from "@/lib/drizzle";
 import { logger } from "@sentry/nextjs";
@@ -36,7 +36,7 @@ export const createUserFileData = async (
 export const getUserFiles = async (userId: string, limit?: number) => {
   const userFileData = await db.query.fileSchema.findMany({
     where: eq(fileSchema.userId, userId),
-    orderBy: desc(fileSchema.expiryDate),
+    orderBy: asc(fileSchema.expiryDate),
     ...(limit ? { limit } : {}),
   });
 

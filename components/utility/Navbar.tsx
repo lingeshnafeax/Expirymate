@@ -19,6 +19,8 @@ import { Switch } from "../ui/switch";
 import { Label } from "../ui/label";
 import useTheme from "@/hooks/useTheme";
 import useSignOut from "@/hooks/api/useSignOut";
+import Link from "next/link";
+import AppIcon from "../icons/AppIcon";
 
 const Navbar = () => {
   const t = useTranslations("navBar");
@@ -39,13 +41,18 @@ const Navbar = () => {
 
   return (
     <div className="font-rampartOne relative flex w-full items-center justify-between py-5 lg:py-10">
-      <h3 className="text-3xl font-semibold lg:text-5xl">{t("title")}</h3>
+      <div className="flex items-center space-x-2">
+        <AppIcon />
+        <Link className="text-3xl font-semibold lg:text-4xl" href="/">
+          {t("title")}
+        </Link>
+      </div>
       {isLoggedIn ? (
         <DropdownMenu>
           <DropdownMenuTrigger>
             <AvatarTypography name={data?.user.name} />
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56" align="end">
+          <DropdownMenuContent className="text-md w-56 sm:text-lg" align="end">
             <DropdownMenuLabel>
               {t("menu.title", { name: data?.user.name || "John Doe" })}
             </DropdownMenuLabel>
@@ -65,7 +72,9 @@ const Navbar = () => {
                 onCheckedChange={switchTheme}
                 id="airplane-mode"
               />
-              <Label htmlFor="airplane-mode">{t("menu.menus.darkMode")}</Label>
+              <Label htmlFor="airplane-mode " className="text-md sm:text-lg">
+                {t("menu.menus.darkMode")}
+              </Label>
             </DropdownMenuItem>
             <DropdownMenuItem
               variant="destructive"

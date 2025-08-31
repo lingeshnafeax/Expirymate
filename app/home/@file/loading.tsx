@@ -1,24 +1,39 @@
 "use client";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const loading = () => {
   return (
     <div className="my-4 grid gap-6 md:grid-cols-2">
-      {Array.from({ length: 2 }, (_, i) => i + 1).map((_, i) => (
-        <Card key={i}>
-          <CardContent className="flex flex-row justify-between rounded-xl">
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Skeleton className="h-5 w-[150px]"></Skeleton>
-                <Skeleton className="h-5 w-[100px]"></Skeleton>
-              </div>
-              <Skeleton className="h-4 w-[250px]"></Skeleton>
+      {Array.from({ length: 3 }, (_, i) => i + 1).map((_, i) => (
+        <Card key={i} className="animate-pulse rounded-3xl">
+          <CardContent className="space-y-3">
+            {/* Badge */}
+            <Skeleton className="h-5 w-[20%] rounded-full" />
+
+            {/* Title + Description */}
+            <div className="space-y-2">
+              <CardHeader className="px-0">
+                <Skeleton className="h-6 w-[40%]" />
+              </CardHeader>
+              <CardDescription>
+                <Skeleton className="h-4 w-[60%]" />
+              </CardDescription>
             </div>
-            <div className="flex flex-col items-end space-y-2">
-              <Skeleton className="h-4 w-[50px]"></Skeleton>
-              <Skeleton className="h-10 w-[40px]"></Skeleton>
-              <Skeleton className="h-4 w-[40px]"></Skeleton>
+
+            {/* Days + View button row */}
+            <div className="flex flex-row items-center justify-between">
+              {/* Days */}
+              <div className="flex flex-row items-center gap-x-2">
+                <Skeleton className="h-6 w-6 rounded-full" />{" "}
+                {/* Icon placeholder */}
+                <Skeleton className="h-6 min-w-3" />
+              </div>
             </div>
           </CardContent>
         </Card>

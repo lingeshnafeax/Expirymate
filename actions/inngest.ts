@@ -2,7 +2,6 @@ import { inngest } from "@/lib/inngest";
 
 import { createUserFileData } from "./db";
 import { externalApiService } from "@/service";
-import { revalidatePath } from "next/cache";
 
 export const scanPdf = inngest.createFunction(
   { id: "expiry.mate" },
@@ -30,7 +29,6 @@ export const scanPdf = inngest.createFunction(
           event.user.userId,
           fileData.fileName,
         )) ?? [];
-      revalidatePath("/home");
       return userFileData;
     });
   },

@@ -19,3 +19,14 @@ export const ACCESS_CONTROL: Record<Roles, string[]> = {
 export const MAXIMUM_FILE_SIZE_KB = 120;
 
 export const DEFAULT_NO_OF_FILES_TO_FETCH = 4;
+
+export const allowedFileTypes = [
+  // "application/pdf",
+  "image/png",
+  "image/jpeg",
+  "image/jpg",
+];
+
+export const EXTERNAL_LINKS = {
+  GITHUB: "https://github.com/lingeshnafeax",
+};

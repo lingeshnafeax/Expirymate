@@ -47,7 +47,7 @@ export default function RootLayout({
       >
         <ReactQueryProvider>
           <NextIntlClientProvider>
-            <div className="px-5 xl:px-72">
+            <div className="relative flex min-h-screen flex-col px-5 sm:px-8 md:px-12 lg:px-36">
               <Toaster richColors />
               <Navbar />
               {children}

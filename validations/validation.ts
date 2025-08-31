@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { allowedFileTypes } from "@/constants";
 export const signUpWithEmailSchema = z
   .object({
     email: z.email({
@@ -39,13 +40,7 @@ export const fileUploadSchema = z.object({
     .instanceof(File, { error: "File is required." })
     .refine(
       (file) => {
-        console.log(file.type);
-        return [
-          // "application/pdf",
-          "image/png",
-          "image/jpeg",
-          "image/jpg",
-        ].includes(file.type);
+        return allowedFileTypes.includes(file.type);
       },
       { error: "Please upload JPG, JPEG or PNG file" },
     )

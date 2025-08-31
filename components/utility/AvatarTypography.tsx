@@ -6,7 +6,7 @@ const AvatarTypography = ({ name = "John Doe" }: { name?: string }) => {
     name.charAt(name.length - 1),
   ];
   return (
-    <span className="bg-secondary text-background flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-lg font-semibold lg:h-12 lg:w-12 lg:text-2xl">
+    <span className="bg-secondary text-background text-md flex h-8 w-8 cursor-pointer items-center justify-center rounded-full font-semibold lg:h-10 lg:w-10 lg:text-lg">
       {(firstLetter + lastLetter).toUpperCase()}
     </span>
   );

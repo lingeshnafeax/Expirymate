@@ -15,7 +15,6 @@ export const fetchEventInfo = async (eventId: string) => {
 
 export async function getRunOutput(eventId: string) {
   const runs = await fetchEventInfo(eventId);
-  console.log("Runs", runs);
   return runs;
 }
 

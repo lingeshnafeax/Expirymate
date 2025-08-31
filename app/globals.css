@@ -192,11 +192,31 @@
   --shadow-blur: var(--shadow-blur);
   --shadow-opacity: var(--shadow-opacity);
   --color-shadow-color: var(--shadow-color);
-}
 
-body {
-  letter-spacing: var(--tracking-normal);
-  font-family: var(--font-Zain);
+  --animate-fade-in-from-right: fadeIn 0.3s ease-in-out forwards;
+  --animate-fade-out-to-right: fadeOut 0.3s ease-in-out forwards;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+  }
 }
 
 @layer base {
@@ -206,5 +226,10 @@ body {
   body {
     @apply bg-background text-foreground;
     letter-spacing: var(--tracking-normal);
+    font-family: var(--font-Zain);
+    ::selection {
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+    }
   }
 }

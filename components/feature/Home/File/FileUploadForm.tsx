@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { FileIcon, Upload, X } from "lucide-react";
+import { ImageUp, Upload, X } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -178,9 +178,9 @@ const FileUploadForm = () => {
           setFileUploadDialogOpen(true);
         }}
         asChild
-        className="fixed right-5 bottom-5 rounded-full lg:right-72"
+        className="fixed right-5 bottom-5 rounded-full sm:right-8 md:right-12 lg:right-36"
       >
-        <FileIcon className="h-12 w-12 lg:h-15 lg:w-15" />
+        <ImageUp className="h-12 w-12" />
       </Button>
     </>
   );

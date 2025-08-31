@@ -26,6 +26,10 @@ import { Loader } from "lucide-react";
 const SignInForm = () => {
   const form = useForm<z.infer<typeof signInWithEmailSchema>>({
     resolver: zodResolver(signInWithEmailSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
   const t = useTranslations("authPage.signInForm");
   const { mutateAsync: handleUserLogin, isPending } = useLoginWithEmail();
@@ -76,7 +80,11 @@ const SignInForm = () => {
               )}
             />
             <Button disabled={isPending} type="submit">
-              {isPending ? <Loader /> : t("submitButton.text")}
+              {isPending ? (
+                <Loader className="animate-spin" />
+              ) : (
+                t("submitButton.text")
+              )}
             </Button>
           </form>
         </Form>

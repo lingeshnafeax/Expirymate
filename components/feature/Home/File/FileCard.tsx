@@ -8,30 +8,40 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { differenceInCalendarDays } from "date-fns";
+import { Hourglass, MoveRight } from "lucide-react";
+import Link from "next/link";
 const FileCard = ({ cardData }: { cardData: FileCardProps }) => {
   return (
-    <Card>
-      <CardContent className="flex flex-row justify-between gap-y-2">
-        <div className="space-y-3">
-          <div className="">
-            <CardHeader className="px-0 text-xl font-semibold">
-              {cardData.issuer}
-            </CardHeader>
-            <Badge>{cardData.fileCategory}</Badge>
-          </div>
+    <Card className="group rounded-3xl shadow-2xs transition-shadow hover:shadow-md">
+      <CardContent className="space-y-3">
+        <Badge className="text-primary bg-primary/10 font-semibold">
+          {cardData.fileCategory}
+        </Badge>
+        <div className="">
+          <CardHeader className="px-0 text-xl font-semibold">
+            {cardData.issuer}
+          </CardHeader>
           <CardDescription>{cardData.description}</CardDescription>
         </div>
-        <div>
-          <span className="text-nowrap">Expires in</span>
-          <div className="flex flex-col items-end">
-            <p className="text-right text-2xl font-semibold">
+
+        <div className="flex flex-row items-center justify-between">
+          <div className="flex flex-row items-center gap-x-1">
+            <Hourglass className="text-foreground/60 h-3.5 w-3.5" />
+            <span className="mt-1 text-lg font-semibold">
               {differenceInCalendarDays(
                 new Date(cardData.expiryDate),
                 new Date(),
-              )}
-            </p>
-            <span className="-mt-2">days</span>
+              )}{" "}
+              days
+            </span>
           </div>
+          {/* // TODO: Link to file detail page  */}
+          <Link
+            href={"/home"}
+            className="text-secondary group-hover:animate-in hidden flex-row items-center gap-x-2 font-semibold group-hover:flex"
+          >
+            View <MoveRight />
+          </Link>
         </div>
       </CardContent>
     </Card>

@@ -27,6 +27,12 @@ import useSignUpWithEmail from "@/hooks/api/useSignUpWithEmail";
 const SignUpForm = () => {
   const form = useForm<z.infer<typeof signUpWithEmailSchema>>({
     resolver: zodResolver(signUpWithEmailSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
   });
   const { mutateAsync: signUpWithEmailAndPassword, isPending } =
     useSignUpWithEmail();
@@ -105,7 +111,11 @@ const SignUpForm = () => {
             />
 
             <Button type="submit" disabled={isPending}>
-              {isPending ? <Loader /> : t("submitButton.text")}
+              {isPending ? (
+                <Loader className="animate-spin" />
+              ) : (
+                t("submitButton.text")
+              )}
             </Button>
           </form>
         </Form>
