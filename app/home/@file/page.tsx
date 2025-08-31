@@ -10,7 +10,7 @@ const page = async () => {
     DEFAULT_NO_OF_FILES_TO_FETCH,
   ); //? Asserting here since this logic is already handled in middleware
   return (
-    <div className="my-4 grid gap-6 md:grid-cols-2">
+    <div className="my-4 grid gap-3 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
       {userFiles.map((userFile) => {
         return <FileCard key={userFile.id} cardData={userFile} />;
       })}

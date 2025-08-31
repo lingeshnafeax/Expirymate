@@ -45,7 +45,7 @@ const AuthenticationPage = () => {
             onClick={() => signInWithGoogle()}
             className="mt-6"
           >
-            <p>Sign in with Google</p>
+            <p>{t("signInWithGoogle")}</p>
             <GoogleIcon />
           </Button>
         </Tabs>

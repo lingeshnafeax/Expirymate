@@ -39,8 +39,10 @@ import { uploadFile } from "@/actions/actions";
 import { compressFile } from "@/utils/client";
 import { logger } from "@sentry/nextjs";
 import { parseError } from "@/utils/helper";
+import { useTranslations } from "next-intl";
 
 const FileUploadForm = () => {
+  const t = useTranslations("homePage.fileSection.form");
   const form = useForm<z.infer<typeof fileUploadSchema>>({
     resolver: zodResolver(fileUploadSchema),
   });
@@ -84,9 +86,9 @@ const FileUploadForm = () => {
       >
         <DialogContent>
           <DialogHeader className="gap-0">
-            <DialogTitle>Upload the file</DialogTitle>
+            <DialogTitle> {t("title")}</DialogTitle>
             <DialogDescription className="text-lg">
-              Let the AI do all the work.
+              {t("description")}
             </DialogDescription>
           </DialogHeader>
 
@@ -97,7 +99,7 @@ const FileUploadForm = () => {
                 name="file"
                 render={() => (
                   <FormItem className="mb-4 grid gap-1">
-                    <FormLabel className="sr-only">Upload a file</FormLabel>
+                    <FormLabel className="sr-only">{t("inputTitle")}</FormLabel>
                     <FormControl>
                       <FileUpload
                         accept=".pdf,.jpg,.jpeg,.png"
@@ -114,20 +116,16 @@ const FileUploadForm = () => {
                               <Upload className="text-muted-foreground size-6" />
                             </div>
                             <FormDescription className="text-foreground text-lg font-semibold">
-                              Drag & drop files here
+                              {t("inputLabel")}
                             </FormDescription>
 
                             <FormDescription>
-                              We currently support pdf, png, jpg.
+                              {t("inputDescription")}
                             </FormDescription>
                           </div>
                           <FileUploadTrigger asChild>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="mt-2 w-fit"
-                            >
-                              Browse files
+                            <Button variant="outline" className="mt-2 w-fit">
+                              {t("inputCta")}
                             </Button>
                           </FileUploadTrigger>
                         </FileUploadDropzone>
@@ -166,7 +164,9 @@ const FileUploadForm = () => {
                 type="submit"
                 className="w-full text-xl font-semibold"
               >
-                {form.formState.isSubmitting ? "Processing..." : "Submit"}
+                {form.formState.isSubmitting
+                  ? t("submitButton.loading")
+                  : t("submitButton.normal")}
               </Button>
             </form>
           </Form>

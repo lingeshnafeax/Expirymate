@@ -1,5 +1,5 @@
 {
-  "homePage": {
+  "landingPage": {
     "heroSection": {
       "title": "We Remember <br />So You Don’t Have To.",
       "description": "Expirymate helps you keep track of your important dates effortlessly.<br/> Never forget an expiry date again.",
@@ -48,7 +48,8 @@
       "submitButton": {
         "text": "Register"
       }
-    }
+    },
+    "signInWithGoogle": "Sign in with Google"
   },
   "navBar": {
     "title": "Expirymate",
@@ -60,6 +61,24 @@
         "darkMode": "Dark Mode",
         "logout": "Logout"
       }
+    }
+  },
+  "homePage": {
+    "fileSection": {
+      "title": "Hurry! Ending Soon",
+      "form": {
+        "title": "Upload the file",
+        "description": "Let us do all the work.",
+        "inputTitle": "Upload a file",
+        "inputLabel": "Drag & drop files here",
+        "inputDescription": " We currently support pdf, png, jpg.",
+        "inputCta": "Browse files",
+        "submitButton": {
+          "normal": "Upload",
+          "loading": "Processing"
+        }
+      },
+      "error": "Something went wrong in our end."
     }
   }
 }

@@ -1,5 +1,5 @@
 import FileMoreButton from "@/components/feature/Home/File/FileMoreButton";
-import { Timer } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { ReactNode } from "react";
 
 export default async function Layout({
@@ -9,11 +9,12 @@ export default async function Layout({
   children: ReactNode;
   file: ReactNode;
 }) {
+  const t = await getTranslations("homePage");
   return (
     <>
       <div>
         <div className="flex items-center justify-between">
-          <h3 className="font-Gabarito text-xl">Hurry! Ending Soon</h3>
+          <h3 className="font-Gabarito text-xl">{t("fileSection.title")}</h3>
           <FileMoreButton />
         </div>
         {file}

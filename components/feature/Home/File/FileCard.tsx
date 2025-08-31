@@ -12,8 +12,8 @@ import { Hourglass, MoveRight } from "lucide-react";
 import Link from "next/link";
 const FileCard = ({ cardData }: { cardData: FileCardProps }) => {
   return (
-    <Card className="group rounded-3xl shadow-2xs transition-shadow hover:shadow-md">
-      <CardContent className="space-y-3">
+    <Card className="group rounded-3xl py-4 shadow-2xs transition-shadow hover:shadow-md sm:py-6">
+      <CardContent className="space-y-1.5 sm:space-y-3">
         <Badge className="text-primary bg-primary/10 font-semibold">
           {cardData.fileCategory}
         </Badge>

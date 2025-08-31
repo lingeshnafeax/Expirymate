@@ -32,7 +32,7 @@ const loading = () => {
               <div className="flex flex-row items-center gap-x-2">
                 <Skeleton className="h-6 w-6 rounded-full" />{" "}
                 {/* Icon placeholder */}
-                <Skeleton className="h-6 min-w-3" />
+                <Skeleton className="h-6 min-w-10 sm:min-w-20" />
               </div>
             </div>
           </CardContent>

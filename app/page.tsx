@@ -8,7 +8,7 @@ import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
 const page = async () => {
-  const t = await getTranslations("homePage.heroSection");
+  const t = await getTranslations("landingPage.heroSection");
   return (
     <>
       <div className="flex h-full w-full flex-1 flex-col justify-between">
