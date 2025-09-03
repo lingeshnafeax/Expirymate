@@ -41,13 +41,13 @@ const page = async () => {
         <p className="mb-4 flex items-center justify-end gap-x-1 text-sm sm:justify-start md:mb-6">
           Made with <Heart height={10} width={10} className="text-secondary" />{" "}
           by{" "}
-          <Link
+          <a
             href={EXTERNAL_LINKS.GITHUB}
             className="animate-bounce"
             target="_blank"
           >
             Lingesh
-          </Link>
+          </a>
         </p>
       </div>
       <Connection className="fixed right-5 bottom-5 -z-10 max-h-[300px] min-h-[250px] sm:right-10 sm:bottom-10 sm:max-h-[400px] sm:max-w-[500px] lg:max-h-[500px] lg:max-w-[600px]" />
