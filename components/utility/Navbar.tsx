@@ -65,16 +65,16 @@ const Navbar = () => {
               onClick={(e) => {
                 e.preventDefault();
               }}
-              className="flex items-center space-x-2"
+              className="flex items-center justify-between space-x-2"
             >
+              <Label htmlFor="airplane-mode " className="text-md sm:text-lg">
+                {t("menu.menus.darkMode")}
+              </Label>
               <Switch
                 checked={theme === "dark"}
                 onCheckedChange={switchTheme}
                 id="airplane-mode"
               />
-              <Label htmlFor="airplane-mode " className="text-md sm:text-lg">
-                {t("menu.menus.darkMode")}
-              </Label>
             </DropdownMenuItem>
             <DropdownMenuItem
               variant="destructive"
