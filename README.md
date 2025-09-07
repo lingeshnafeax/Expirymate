@@ -51,3 +51,8 @@ npx drizzle-kit push - Does both the above
 ## Use this to start the inngest dev server
 
 npx inngest-cli@latest dev
+
+
+## For starting drizzle studio 
+
+DATABASE_URL=postgresql://postgres:password@localhost:5432/Expirymate && npx drizzle-kit studio

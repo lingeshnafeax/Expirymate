@@ -12,8 +12,8 @@
     "signInForm": {
       "tabTitle": "Login",
 
-      "title": "Welcome back buddy!",
-      "description": "Let's go back where you left off.",
+      "title": "Back from a coffee break?",
+      "description": "Good timing—we kept everything warm for you.",
       "fields": {
         "email": {
           "label": "Email"
@@ -29,8 +29,8 @@
     "signUpForm": {
       "tabTitle": "Register",
 
-      "title": "Ahh guess who is new here!",
-      "description": "Let's get you onboard.",
+      "title": "Look who just joined the party!",
+      "description": "Hop in—we’ve been waiting for you.",
       "fields": {
         "name": {
           "label": "Name"
@@ -65,10 +65,10 @@
   },
   "homePage": {
     "fileSection": {
-      "title": "Hurry! Ending Soon",
+      "title": "Quick! Time’s running out ⏳",
       "form": {
-        "title": "Upload the file",
-        "description": "Let us do all the work.",
+        "title": "Drop your file like it’s hot 🔥",
+        "description": "Sit back—we’ll handle the heavy lifting.",
         "inputTitle": "Upload a file",
         "inputLabel": "Drag & drop files here",
         "inputDescription": " We currently support pdf, png, jpg.",
@@ -78,7 +78,16 @@
           "loading": "Processing"
         }
       },
-      "error": "Something went wrong in our end."
+      "error": "Looks like our servers took a coffee break. Mind refreshing while we wake them up?",
+      "empty": "Your filters are so specific, even Sherlock would struggle. Try tweaking them a bit!",
+      "filter": {
+        "title": "Filter",
+        "description": "Tweak those filters and let the magic happen. Only the juicy stuff makes it through!",
+        "category": "Category",
+        "period": "Period",
+        "reset": "Reset",
+        "apply": "Apply"
+      }
     }
   }
 }

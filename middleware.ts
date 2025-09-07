@@ -34,6 +34,6 @@ export default async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/home", "/login"] satisfies AppRoutes[],
+  matcher: ["/home", "/login", "/file"] satisfies AppRoutes[],
   runtime: "nodejs",
 };

@@ -5,6 +5,9 @@ import createNextIntlPlugin from "next-intl/plugin";
 const nextConfig: NextConfig = {
   output: "standalone",
   typedRoutes: true,
+  experimental: {
+    reactCompiler: true,
+  },
 };
 const withNextIntl = createNextIntlPlugin("./lib/i8n.ts");
 export default withSentryConfig(withNextIntl(nextConfig), {

@@ -3,7 +3,7 @@ export const fakeGeminiScanResponse = {
   description: "Gold max membership for 1 year worth ₹800",
   discountInfo:
     "5% Cashback on all orders. 10% off on Aqualens Contact Lenses.",
-  expiryDate: "2025/10/25",
+  expiryDate: new Date("2025-12-31"),
   fileCategory: "Coupon Card",
   issueDate: null,
   issuer: "Lenskart",
@@ -20,6 +20,6 @@ export const fakeGeminiScanResponse = {
     "Membership is valid for 365 days from the date of purchase.",
     "Membership benefits can be availed 2 orders per month & 12 orders per Year.",
   ],
-  title: "Free Lenskart Gold max membership",
+  title: "Skull candy discount coupon",
   value: "₹800",
 };

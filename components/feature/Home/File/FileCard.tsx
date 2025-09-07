@@ -1,4 +1,4 @@
-import { FileCardProps } from "@/types/types";
+import { FileData } from "@/types/types";
 import React from "react";
 import {
   Card,
@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { differenceInCalendarDays } from "date-fns";
 import { Hourglass, MoveRight } from "lucide-react";
 import Link from "next/link";
-const FileCard = ({ cardData }: { cardData: FileCardProps }) => {
+const FileCard = ({ cardData }: { cardData: FileData }) => {
   return (
     <Card className="group rounded-3xl py-4 shadow-2xs transition-shadow hover:shadow-md sm:py-6">
       <CardContent className="space-y-1.5 sm:space-y-3">
@@ -37,7 +37,7 @@ const FileCard = ({ cardData }: { cardData: FileCardProps }) => {
           </div>
           {/* // TODO: Link to file detail page  */}
           <Link
-            href={"/home"}
+            href={`/file/${cardData.id}`}
             className="text-secondary group-hover:animate-in hidden flex-row items-center gap-x-2 font-semibold group-hover:flex"
           >
             View <MoveRight />

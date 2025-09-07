@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export const splitBase64String = (data: string) => {
   return data.includes(",") ? data.split(",")[1] : data;
 };
@@ -20,5 +22,6 @@ export const parseError = (err: unknown) => {
 };
 
 export const formatDateForQuery = (date: Date = new Date()) => {
-  return date.toISOString().replace("T", " ").replace("Z", "");
+  return format(date, "yyyy-MM-dd HH:mm:ss");
 };
+

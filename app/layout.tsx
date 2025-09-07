@@ -33,11 +33,7 @@ export const metadata: Metadata = {
   description: "Your AI-powered app to track everything that expires.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   const locale = use(getLocale());
 
   return (

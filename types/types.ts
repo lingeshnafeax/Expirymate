@@ -1,4 +1,4 @@
-import { insertFileSchema, session, user } from "@/db";
+import { selectFileSchema, session, user } from "@/db";
 import { APP_ROUTES } from "@/constants";
 import z from "zod";
 
@@ -31,6 +31,6 @@ export interface IEncodedFileSchema {
   base64: string;
 }
 
-export type FileCardProps = z.infer<typeof insertFileSchema>;
-
 export type AppRoutes = `${APP_ROUTES}`;
+
+export type FileData = z.infer<typeof selectFileSchema>;

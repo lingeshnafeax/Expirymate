@@ -1,9 +1,11 @@
-import { asc } from "drizzle-orm";
+import { asc, ilike, lte } from "drizzle-orm";
 import { insertFileSchema, fileSchema } from "@/db";
 import { db } from "@/lib/drizzle";
 import { logger } from "@sentry/nextjs";
 import { eq, gte, and } from "drizzle-orm";
-import { formatDateForQuery } from "@/utils/helper";
+import { formatDateForQuery, parseError } from "@/utils/helper";
+import { fetchFileQueryParamsSchema } from "@/validations/validation";
+import z from "zod";
 
 export const createUserFileData = async (
   data: unknown,
@@ -33,14 +35,42 @@ export const createUserFileData = async (
   }
 };
 
-export const getUserFiles = async (userId: string, limit?: number) => {
-  const userFileData = await db.query.fileSchema.findMany({
-    where: eq(fileSchema.userId, userId),
-    orderBy: asc(fileSchema.expiryDate),
-    ...(limit ? { limit } : {}),
-  });
+export const getUserFiles = async (
+  userId: string,
+  filters: z.infer<typeof fetchFileQueryParamsSchema>,
+) => {
+  try {
+    const conditions = [eq(fileSchema.userId, userId)];
 
-  return userFileData;
+    if (filters.category && filters.category !== "All") {
+      conditions.push(eq(fileSchema.fileCategory, filters.category));
+    }
+
+    if (filters.startDate) {
+      conditions.push(
+        gte(fileSchema.expiryDate, formatDateForQuery(filters.startDate)),
+      );
+    }
+
+    if (filters.endDate) {
+      conditions.push(
+        lte(fileSchema.expiryDate, formatDateForQuery(filters.endDate)),
+      );
+    }
+
+    if (filters.searchString) {
+      conditions.push(ilike(fileSchema.issuer, `%${filters.searchString}%`));
+    }
+
+    const userFileData = await db.query.fileSchema.findMany({
+      where: and(...conditions),
+      orderBy: asc(fileSchema.expiryDate),
+    });
+
+    return userFileData;
+  } catch (err) {
+    console.error("Error fetching user files:", parseError(err));
+  }
 };
 
 export const getExpiringFilesCount = async (userId: string) => {
@@ -57,6 +87,18 @@ export const getExpiringFilesCount = async (userId: string) => {
     return totalFiles.length;
   } catch (err) {
     console.error("Error fetching expiring files count:", err);
+    logger.error("Error fetching expiring files count", parseError(err));
     return 0;
+  }
+};
+
+export const getFileById = (fileId: string) => {
+  try {
+    return db.query.fileSchema.findFirst({
+      where: eq(fileSchema.id, fileId),
+    });
+  } catch (err) {
+    console.error("Error fetching file by id:", parseError(err));
+    logger.error("Error fetching file by id", parseError(err));
   }
 };

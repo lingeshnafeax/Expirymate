@@ -9,6 +9,7 @@ export enum APP_ROUTES {
   LOGIN = "/login",
   HOME = "/home",
   FORBIDDEN = "/forbidden",
+  FILE = "/file",
 }
 
 export const ACCESS_CONTROL: Record<Roles, string[]> = {
@@ -29,4 +30,11 @@ export const allowedFileTypes = [
 
 export const EXTERNAL_LINKS = {
   GITHUB: "https://github.com/lingeshnafeax",
+};
+
+export const fileCategoriesForFiltering = [...FileCategories, "All"] as const;
+
+export const FileUploadAvailableDates = {
+  startDate: new Date(2025, 0, 1),
+  endDate: new Date(2100, 1, 1),
 };

@@ -1,25 +1,25 @@
 import FileFilter from "@/components/feature/Home/File/FileFilter";
-import FileMoreButton from "@/components/feature/Home/File/FileMoreButton";
+import { FileProvider } from "@/context/FileContext";
 import { getTranslations } from "next-intl/server";
-import { ReactNode } from "react";
+import { Suspense } from "react";
 
-export default async function Layout({
-  children,
-  file,
-}: {
-  children: ReactNode;
-  file: ReactNode;
-}) {
+export default async function Layout({ children, file }: LayoutProps<"/home">) {
   const t = await getTranslations("homePage");
   return (
     <>
-      <div>
-        <div className="flex items-center justify-between">
-          <h3 className="font-Gabarito text-xl">{t("fileSection.title")}</h3>
-          <FileFilter />
-          {/* <FileMoreButton /> */}
-        </div>
-        {file}
+      <div className="space-y-2 sm:space-y-5">
+        <FileProvider>
+          <div className="flex flex-col items-start justify-between space-y-3 sm:flex-row sm:items-center sm:gap-x-5 md:gap-x-20 lg:gap-x-40">
+            <h3 className="font-Gabarito text-xl text-nowrap">
+              {t("fileSection.title")}
+            </h3>
+            <Suspense>
+              <FileFilter />
+            </Suspense>
+            {/* <FileMoreButton /> */}
+          </div>
+          {file}
+        </FileProvider>
       </div>
       {children}
     </>

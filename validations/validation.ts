@@ -1,5 +1,7 @@
 import { z } from "zod";
 import { allowedFileTypes } from "@/constants";
+import { fileCategoriesForFiltering } from "@/constants/constants";
+import { isValid, parse } from "date-fns";
 export const signUpWithEmailSchema = z
   .object({
     email: z.email({
@@ -49,3 +51,25 @@ export const fileUploadSchema = z.object({
       { error: "File size must be less than 5MB" },
     ),
 });
+export const fetchFileQueryParamsSchema = z
+  .object({
+    category: z.enum(fileCategoriesForFiltering).default("All"),
+
+    startDate: z.iso
+      .date()
+      .transform((date) => parse(date, "yyyy-MM-dd", new Date()))
+      .refine((date) => !date || isValid(date), { message: "Invalid date" })
+      .optional(),
+
+    endDate: z.iso
+      .date()
+      .transform((date) => parse(date, "yyyy-MM-dd", new Date()))
+      .refine((date) => !date || isValid(date), { message: "Invalid date" })
+      .optional(),
+
+    searchString: z
+      .string()
+      .transform((value) => value.trim().toLowerCase())
+      .default(""),
+  })
+  .strip();
