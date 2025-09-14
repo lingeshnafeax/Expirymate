@@ -1,45 +1,65 @@
 "use client";
-import {
-  Card,
-  CardHeader,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
+
+import { CardContent, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Separator } from "@/components/ui/separator";
 
-const loading = () => {
+const FileLoading = () => {
   return (
-    <div className="my-4 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-      {Array.from({ length: 3 }, (_, i) => i + 1).map((_, i) => (
-        <Card key={i} className="animate-pulse rounded-3xl">
-          <CardContent className="space-y-3">
-            {/* Badge */}
-            <Skeleton className="h-5 w-[20%] rounded-full" />
+    <section className="pb-10">
+      <div>
+        {/* Header with back button */}
+        <CardHeader className="px-0 pb-6">
+          <Skeleton className="h-9 w-9 rounded-md" />
+        </CardHeader>
 
-            {/* Title + Description */}
-            <div className="space-y-2">
-              <CardHeader className="px-0">
-                <Skeleton className="h-6 w-[40%]" />
-              </CardHeader>
-              <CardDescription>
-                <Skeleton className="h-4 w-[60%]" />
-              </CardDescription>
+        <CardContent className="space-y-6 px-0">
+          {/* Issuer and Category */}
+          <div className="flex flex-col items-start gap-y-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col items-start gap-y-2">
+              <Skeleton className="h-8 w-48" />
+              <Skeleton className="h-6 w-24 rounded-full" />
             </div>
+            <div className="flex items-center gap-2">
+              <Skeleton className="h-4 w-4 rounded-full" />
+              <Skeleton className="h-5 w-40" />
+            </div>
+          </div>
 
-            {/* Days + View button row */}
-            <div className="flex flex-row items-center justify-between">
-              {/* Days */}
-              <div className="flex flex-row items-center gap-x-2">
-                <Skeleton className="h-6 w-6 rounded-full" />{" "}
-                {/* Icon placeholder */}
-                <Skeleton className="h-6 min-w-10 sm:min-w-20" />
+          <Separator />
+
+          {/* Value and Discount */}
+          <div className="grid gap-4 sm:grid-cols-2">
+            {['Value', 'Discount'].map((label) => (
+              <div key={label} className="space-y-2 rounded-lg bg-muted/40 p-4">
+                <Skeleton className="h-4 w-16" />
+                <Skeleton className="h-6 w-24" />
               </div>
+            ))}
+          </div>
+
+          {/* File Preview Skeleton */}
+          <div className="space-y-2">
+            <Skeleton className="h-6 w-16" />
+            <Skeleton className="h-48 w-full max-w-xs rounded-md" />
+          </div>
+
+          {/* Terms & Conditions */}
+          <div className="space-y-2">
+            <Skeleton className="h-6 w-40" />
+            <div className="space-y-2">
+              {Array.from({ length: 3 }).map((_, i) => (
+                <div key={i} className="flex items-start gap-2">
+                  <Skeleton className="mt-1 h-3 w-3 flex-shrink-0 rounded-full" />
+                  <Skeleton className="h-4 w-full max-w-md" />
+                </div>
+              ))}
             </div>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
+          </div>
+        </CardContent>
+      </div>
+    </section>
   );
 };
 
-export default loading;
+export default FileLoading;

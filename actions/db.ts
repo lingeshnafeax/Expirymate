@@ -41,6 +41,8 @@ export const getUserFiles = async (
 ) => {
   try {
     const conditions = [eq(fileSchema.userId, userId)];
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
     if (filters.category && filters.category !== "All") {
       conditions.push(eq(fileSchema.fileCategory, filters.category));
@@ -62,14 +64,22 @@ export const getUserFiles = async (
       conditions.push(ilike(fileSchema.issuer, `%${filters.searchString}%`));
     }
 
-    const userFileData = await db.query.fileSchema.findMany({
+    const allFiles = await db.query.fileSchema.findMany({
       where: and(...conditions),
       orderBy: asc(fileSchema.expiryDate),
     });
 
-    return userFileData;
+    // Separate expired and expiring files
+    const expiredFiles = allFiles.filter(file => new Date(file.expiryDate) < today);
+    const expiringFiles = allFiles.filter(file => new Date(file.expiryDate) >= today);
+
+    return {
+      expired: expiredFiles,
+      expiring: expiringFiles
+    };
   } catch (err) {
     console.error("Error fetching user files:", parseError(err));
+    return { expired: [], expiring: [] };
   }
 };
 

@@ -17,6 +17,6 @@ export class FakeExternalApiService implements IExternalApiService {
     return fakeGeminiScanResponse;
   }
   async getSignedS3Url() {
-    return `./stubs/images/Skullcandy.jpg`;
+    return "https://cdn.picodi.com/in/files/shop-description/k/kfc/kfc-promo-code.png?v=1895";
   }
 }
